@@ -1,7 +1,5 @@
 package bit701.day0918;
 
-import java.awt.Color;
-import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
