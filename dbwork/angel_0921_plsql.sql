@@ -106,7 +106,7 @@ BEGIN
 end;
 /
 
---예제 4
+--예제 6
 --db 컬럼의 타입을 가져오는 방법 TYPE
 accept iname prompt 'name?';
 DECLARE
@@ -135,6 +135,7 @@ end;
    end loop;
 */
 --1부터 10까지 반복해서 출력
+--예제 7
 DECLARE
    v_no number(2) := 0;   
 BEGIN
@@ -147,11 +148,48 @@ end;
 /
 
 --문제: 단을 입력하면 해당단을 출력하시오
+--예제 8
+accept dan prompt 'dan?';
 DECLARE
-   
+   v_dan number(2) := '&dan';
+   v_idx number(1) := 1;
+BEGIN    
+   DBMS_Output.put_line('** '||v_dan||' 단 **');
+   loop       
+       DBMS_Output.put_line(v_dan || 'X' || v_idx || '=' || v_dan*v_idx);
+       v_idx := v_idx+1;
+       exit when v_idx=10;
+   end loop;
+end;
+/
+
+-- 상품명을 변수에 지정한후 해당 상품명의 가격과 색상을 출력
+--예제 9 - Exception 처리(예제 4 복사)
+accept sangpum prompt 'sangpum?';
+DECLARE
+   vsangpum varchar2(20) := '&sangpum';
+   vcolor varchar2(20);
+   vprice number(7);
+   vprice2 varchar2(20);
 BEGIN
+  select sang_price,sang_color,ltrim(to_char(sang_price,'L999,999'))
+  into vprice,vcolor,vprice2
+  from shop where sang_name=vsangpum;
   
-   DBMS_Output.put_line();
+   DBMS_Output.put_line('상품명:'||vsangpum);
+   DBMS_Output.put_line('색  상:'||vcolor);
+   DBMS_Output.put_line('단  가:'||vprice);  
+   DBMS_Output.put_line('단  가:'||vprice2);  
+   
+   --결과가 2개 이상이거나 없으면 오류발생
+   --오라클에서 예외처리하는 방법
+   EXCEPTION
+      when NO_DATA_FOUND then
+         DBMS_Output.put_line(vsangpum||' 상품은 DB 에 없습니다');
+      when TOO_MANY_ROWS then
+         DBMS_Output.put_line(vsangpum||' 상품이 DB 에 두개이상 존재합니다');
+      when OTHERS then
+        DBMS_Output.put_line(vsangpum||' 상품에 대한 오류 발생-뭔지 모름');   
 end;
 /
 
