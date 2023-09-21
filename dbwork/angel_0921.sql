@@ -117,13 +117,24 @@ insert into shop values (seq_shop.nextval,'체크자켓',130000,'gray');
 commit;
 
 --cart 에 블라우스,브이넥티(white),체크자켓 3개에 대해서 추가-날짜는 현재날짜로(sysdate)
+insert into cart values (seq_shop.nextval,10,2,sysdate);
+insert into cart values (seq_shop.nextval,30,3,'2023-09-20');
+insert into cart values (seq_shop.nextval,50,1,sysdate);
+commit;
+
+select * from cart;
 
 --조회(inner join)
 -- 상품명,가격,색상,갯수,구입일(yyyy-mm-dd hh24:mi) 
+select sang_name,sang_price,sang_color,cnt,to_char(cartday,'yyyy-mm-dd hh24:mi') cartday
+from shop s,cart c
+where s.sang_no=c.sang_no;
 
 --아무도 cart 에 담지 않은 상품명 조회
 -- 상품명,가격,색상을 출력
-
+select sang_name,sang_price,sang_color
+from shop s,cart c
+where s.sang_no=c.sang_no(+) and c.cnt is null;
 
 
 
