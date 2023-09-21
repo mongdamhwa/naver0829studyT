@@ -295,6 +295,13 @@ BEGIN
 end;
 /
 
+--문제 : food 테이블
+/*
+  fname,fprice, no 입력을 받아서
+  no 가 1 이면 fname,fprice 로 데이타 추가를 하고
+  no 가 2면 food 전체 데이타 출력
+*/
+
 
 
 
