@@ -193,11 +193,107 @@ BEGIN
 end;
 /
 
+/*
+    반복문
+    for 변수 in [reverse]시작값..최종값 loop
+       문장들;
+    end loop;
+*/
 
+--예제10, 예제8 구구단 복사후 for문으로  변경하기
+accept dan prompt 'dan?';
+DECLARE
+   v_dan number(2) := '&dan';
+   v_idx number(1);
+BEGIN    
+   DBMS_Output.put_line('** '||v_dan||' 단 **');
+    
+   for v_idx in 1..9 loop
+       DBMS_Output.put_line(v_dan || 'X' || v_idx || '=' || v_dan*v_idx);
+    end loop;   
+end;
+/
 
+--레코드 단위로 데이타 가져오기
+--예제 11
+DECLARE
+   v_num student.num%TYPE :=6;
+   v_stu angel.student%rowtype; --레코드단위로 읽어올경우
+BEGIN
+   select * into v_stu
+   from student where num=v_num;
+   
+   DBMS_Output.put_line('이름:'||v_stu.name);
+   DBMS_Output.put_line('키:'||v_stu.height);
+   DBMS_Output.put_line('자바:'||v_stu.java);
+   DBMS_Output.put_line('스프링:'||v_stu.spring);
+   DBMS_Output.put_line('반:'||v_stu.ban);   
+end;
+/
 
+-- db 의 여러데이타를 조회할경우
+/*
+    Cursor : sql 문을 실행할때마다 명령이 분석되고 실행되어 결과를 보관하기 위한
+    특별한 메모리 영역을 사용하는데 이영역을 참조하는것이 커서이다
+    
+    select 문에서 여러 데이타 조회시 사용하는 객체이다
+    
+    커서 속성
+    sql%rowcount : 실행된 갯수 반환
+    sql%found : 가장 최근의 sql문이 하나 이상의 행에 영향을 준경우 true
+    sql%notfound : 결과행이 없는경우
+    sql%isopen : 항상 false(항상 close 를 하기때문에 항상 false)
+*/
 
+--예제 12
+DECLARE
+   v_sno number(3) :=20;
+   v_shop angel.shop%rowtype;
+BEGIN
+  select * into v_shop
+  from shop where sang_no=v_sno;
+  
+   DBMS_Output.put_line('상품명:'||v_shop.sang_name);
+   DBMS_Output.put_line('조회된 실행갯수:'||sql%rowcount); -- 1
+   
+   --student 의 java 점수 변경하기
+   update student set java=99;
+   DBMS_Output.put_line('수정된 실행갯수:'||sql%rowcount); --3
+end;
+/
 
+--여러 레코드 조회
+--예제 13
+DECLARE
+   Cursor s1
+   is
+   select * from shop;
+BEGIN  
+   DBMS_Output.put_line('상품번호   상품명   색상   가격');
+   DBMS_Output.put_line('------------------------------');
+   for s in s1 loop
+       exit when s1%notfound;-- 더이상 데이타가 없으면 빠져나간다
+       DBMS_Output.put_line(s.sang_no||'  '||s.sang_name||'  '
+         ||s.sang_color||'  '||s.sang_price);
+   end loop;
+end;
+/
+
+--예제 14
+--상품명,색상,가격을 입력하면 shop db 에 추가하기
+accept isang prompt 'sangpum?';
+accept icolor prompt 'color?';
+accept iprice prompt 'price?';
+DECLARE
+   v_sang shop.sang_name%TYPE:='&isang';
+   v_color shop.sang_color%TYPE:='&icolor';
+   v_price shop.sang_price%TYPE:='&iprice';   
+BEGIN
+  insert into shop values (seq_shop.nextval,v_sang,v_price,v_color);
+  commit;
+  DBMS_Output.put_line('상품정보를 추가했습니다');
+end;
+/
 
 
 
