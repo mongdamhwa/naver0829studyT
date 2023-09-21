@@ -126,7 +126,7 @@ select * from cart;
 
 --조회(inner join)
 -- 상품명,가격,색상,갯수,구입일(yyyy-mm-dd hh24:mi) 
-select sang_name,sang_price,sang_color,cnt,to_char(cartday,'yyyy-mm-dd hh24:mi') cartday
+select s.sang_no, sang_name,sang_price,sang_color,cnt,to_char(cartday,'yyyy-mm-dd hh24:mi') cartday
 from shop s,cart c
 where s.sang_no=c.sang_no;
 
@@ -135,6 +135,40 @@ where s.sang_no=c.sang_no;
 select sang_name,sang_price,sang_color
 from shop s,cart c
 where s.sang_no=c.sang_no(+) and c.cnt is null;
+
+--cascade 를 지정했으므로 cart 에 담긴 상품도 삭제가 된다(이때 cart 도 자동으로 지워짐)
+delete from shop where sang_no=10;
+
+--부모 테이블 drop 시켜보자
+drop table shop;  --에러난다
+
+--테이블 삭제시 sub 테이블 먼저 제거후 부모 테이블 제거
+drop table cart;
+drop table shop;
+
+--시퀀스도 지워보자
+drop SEQUENCE seq_shop;
+
+----------------------------------------------------
+--문제
+-- 시퀀스:seq_food 생성
+-- 레스토랑의 메뉴 테이블 (테이블명 : food)
+-- food_num 숫자(5) 기본키, fname 문자열(20) :메뉴명, fprice 숫자(7) : 가격
+
+--sub 테이블은 : 고객 테이블 (person)
+-- person_num 숫자(5) 기본키, food_num 외부키 설정(cascade 설정)
+-- person_name 문자열(10) : 고객명
+-- 예약일: bookingday : date 타입
+
+--food 에 5개의 메뉴를 등록하자(스파게티,떡볶이 등등등..)
+
+--주문한 고객정보를 추가해보자(같은 메뉴를 여러명 주문하기도 함..)
+
+-- 메뉴중 스파게티를 삭제시 주문한 테이블에서도 지워지는지 확인
+
+--조회 : 시퀀스,주문자명,음식명, 가격,예약일 (제목도 한글로 주기)
+
+
 
 
 
