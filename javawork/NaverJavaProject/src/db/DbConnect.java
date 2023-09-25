@@ -2,6 +2,7 @@ package db;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -70,6 +71,29 @@ public class DbConnect {
 		try {
 			rs.close();
 			stmt.close();
+			conn.close();			
+		}catch(SQLException|NullPointerException e) {
+			System.out.println("close 하다가 오류:"+e.getMessage());			
+		}
+	}
+
+	//close #3
+	public void dbClose(PreparedStatement pstmt,Connection conn)
+	{
+		try {
+			pstmt.close();
+			conn.close();			
+		}catch(SQLException|NullPointerException e) {
+			System.out.println("close 하다가 오류:"+e.getMessage());			
+		}
+	}
+
+	//close #4
+	public void dbClose(ResultSet rs,PreparedStatement pstmt,Connection conn)
+	{
+		try {
+			rs.close();
+			pstmt.close();
 			conn.close();			
 		}catch(SQLException|NullPointerException e) {
 			System.out.println("close 하다가 오류:"+e.getMessage());			
