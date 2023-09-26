@@ -8,6 +8,18 @@
     body * {
         font-family: 'Jua';
     }
+    
+    table{
+		border:5px groove orange;
+		border-collapse: /*separate;기본값*/ collapse; /*칸과칸사이 여백 없애기*/
+	}
+	
+	table td,table tr{
+		border: 1px solid green;
+	}
+	table tr{
+		height: 50px;
+	}
 </style>
 <script>
 	window.onload=function(){
@@ -16,7 +28,30 @@
 </script>	
 </head>
 <body>
-	<h2>ppt 48페이지 테이블 만들기</h2>
-	
+	<h2>HTML ppt 48페이지 테이블 만들기</h2>
+	<table style="width:500px;">
+		<caption><b>표연습</b></caption>
+		<tr>
+			<td rowspan="3" valign="top" bgcolor="cyan">일</td>
+			<td colspan="3" bgcolor="pink">이</td>
+		</tr>
+		<tr>
+			<td colspan="2" bgcolor="pink">삼</td>
+			<td rowspan="3" bgcolor="cyan" valign="bottom">사</td>
+		</tr>		
+		<tr>
+			<td>오</td><td>육</td>
+		</tr>
+		<tr>
+			<td colspan="3" bgcolor="pink">칠</td>
+		</tr>
+	</table>
 </body>
 </html>
+
+
+
+
+
+
+
