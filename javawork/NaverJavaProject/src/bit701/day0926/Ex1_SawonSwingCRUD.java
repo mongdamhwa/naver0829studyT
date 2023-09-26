@@ -23,7 +23,7 @@ import javax.swing.table.DefaultTableModel;
 
 import db.DbConnect;
 
-public class Ex1_StudentSwingCRUD extends JFrame{
+public class Ex1_SawonSwingCRUD extends JFrame{
 	JTextField tfName,tfPhone;
 	JComboBox<String> cbBlood;
 	JTable table;
@@ -32,7 +32,7 @@ public class Ex1_StudentSwingCRUD extends JFrame{
 
 	DbConnect db=new DbConnect();
 
-	public Ex1_StudentSwingCRUD() {
+	public Ex1_SawonSwingCRUD() {
 		// TODO Auto-generated constructor stub
 		super("학생관리");
 		this.setBounds(1000, 100, 550, 400);
@@ -106,7 +106,7 @@ public class Ex1_StudentSwingCRUD extends JFrame{
 				System.out.println(row);//선택안했을겨우 -1
 				if(row==-1)
 				{
-					JOptionPane.showMessageDialog(Ex1_StudentSwingCRUD.this,"삭제할 행을 선택해주세요");
+					JOptionPane.showMessageDialog(Ex1_SawonSwingCRUD.this,"삭제할 행을 선택해주세요");
 				}else {
 					//row행의 0번열이 num 값
 					String num=table.getValueAt(row, 0).toString();
@@ -157,7 +157,7 @@ public class Ex1_StudentSwingCRUD extends JFrame{
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		Ex1_StudentSwingCRUD ex=new Ex1_StudentSwingCRUD();
+		Ex1_SawonSwingCRUD ex=new Ex1_SawonSwingCRUD();
 	}
 
 	//db method
