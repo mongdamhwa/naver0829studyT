@@ -23,19 +23,19 @@ import javax.swing.table.DefaultTableModel;
 
 import db.DbConnect;
 
-public class Ex1_SawonSwingCRUD extends JFrame{
-	JTextField tfName,tfPhone;
-	JComboBox<String> cbBlood;
+public class Ex2_SawonSwingCRUD extends JFrame{
+	JTextField tfName,tfScore;
+	JComboBox<String> cbGender,cbBuseo;
 	JTable table;
 	DefaultTableModel tableModel;
 	JButton btnAdd,btnDel,btnSearch,btnAll;
 
 	DbConnect db=new DbConnect();
 
-	public Ex1_SawonSwingCRUD() {
+	public Ex2_SawonSwingCRUD() {
 		// TODO Auto-generated constructor stub
-		super("학생관리");
-		this.setBounds(1000, 100, 550, 400);
+		super("사원관리");
+		this.setBounds(1000, 100, 450, 400);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setDesign();
 		this.setVisible(true);
@@ -46,18 +46,21 @@ public class Ex1_SawonSwingCRUD extends JFrame{
 
 		//상단
 		tfName=new JTextField(4);
-		tfPhone=new JTextField(10);
-		String []cbTitle= {"A","B","O","AB"};
-		cbBlood=new JComboBox<String>(cbTitle);
+		tfScore=new JTextField(3);
+		String []cbTitle1= {"여자","남자"};
+		String []cbTitle2= {"홍보부","교육부","인사부","사업부"};
+		cbGender=new JComboBox<String>(cbTitle1);
+		cbBuseo=new JComboBox<String>(cbTitle2);
 
 		JPanel pTop=new JPanel();
 		pTop.add(new JLabel("이름"));
 		pTop.add(tfName);
-		pTop.add(new JLabel("전화"));
-		pTop.add(tfPhone);
-		pTop.add(new JLabel("혈액형"));
-		pTop.add(cbBlood);
-
+		pTop.add(new JLabel("점수"));
+		pTop.add(tfScore);
+		pTop.add(new JLabel("성별"));
+		pTop.add(cbGender);
+		pTop.add(new JLabel("부서"));
+		pTop.add(cbBuseo);
 		this.add("North",pTop);
 
 		//하단
@@ -72,27 +75,41 @@ public class Ex1_SawonSwingCRUD extends JFrame{
 		pBottom.add(btnSearch);
 		pBottom.add(btnAll);
 
-		//버튼 이벤트
+//		//버튼 이벤트
 		btnAdd.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				//데이타를 가져온다
-				String name=tfName.getText();
-				String phone=tfPhone.getText();
-				String blood=(String)cbBlood.getSelectedItem();
+				String name=tfName.getText();				
 				//이름이나 전화번호 입력 안했을경우 종료
-				if(name.length()==0 || phone.length()==0)
+				if(name.length()==0) {					
+					JOptionPane.showMessageDialog(Ex2_SawonSwingCRUD.this, "이름을 입력해주세요");
 					return;
+				}
+				
+				int score=0;
+				try {
+					score=Integer.parseInt(tfScore.getText());
+				}catch (NumberFormatException e1) {
+					score=0;//점수에 문자를 넣으면 그냥 0점으로
+				}
+				String gender=(String)cbGender.getSelectedItem();
+				String buseo=(String)cbBuseo.getSelectedItem();
+				
+				if(score<0 || score>100) {					
+					JOptionPane.showMessageDialog(Ex2_SawonSwingCRUD.this, "점수는 0-100 사이값으로 입력해주세요");
+					return;
+				}
 
 				//db 에 insert 하는 메서드 호출
-				insertStudent(name, phone, blood);
+				insertSawon(name,score,gender,buseo);
 				//db로부터 다시 데이타를 가져와서 출력
-				studentSelectAll();
+				SawonSelectAll();
 				//입력값 초기화
 				tfName.setText("");
-				tfPhone.setText("");
+				tfScore.setText("");
 			}
 		});
 
@@ -106,13 +123,13 @@ public class Ex1_SawonSwingCRUD extends JFrame{
 				System.out.println(row);//선택안했을겨우 -1
 				if(row==-1)
 				{
-					JOptionPane.showMessageDialog(Ex1_SawonSwingCRUD.this,"삭제할 행을 선택해주세요");
+					JOptionPane.showMessageDialog(Ex2_SawonSwingCRUD.this,"삭제할 행을 선택해주세요");
 				}else {
 					//row행의 0번열이 num 값
 					String num=table.getValueAt(row, 0).toString();
-					deleteStudent(num);
+					deleteSawon(num);
 					//삭제후 데이타 다시 불러온다
-					studentSelectAll();
+					SawonSelectAll();
 				}
 			}
 		});
@@ -124,12 +141,11 @@ public class Ex1_SawonSwingCRUD extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				//검색할 이름 입력받기
-				String searchName=JOptionPane.showInputDialog("검색할 이름을 입력해주세요");
-				System.out.println(searchName);
-				if(searchName==null)
+				String searchBuseo=JOptionPane.showInputDialog("검색할 부서명을 입력해주세요");
+				if(searchBuseo==null)
 					return; //취소누를경우 이벤트 종료
 				else
-					searchStudent(searchName);//이름이 포함된 모든 데이타 테이블에 출력
+					searchSawon(searchBuseo);//이름이 포함된 모든 데이타 테이블에 출력
 			}			
 		});
 
@@ -139,30 +155,30 @@ public class Ex1_SawonSwingCRUD extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				studentSelectAll();
+				SawonSelectAll();
 			}
 		});
 
 		this.add("South",pBottom);
 
 		//Center Table
-		String []title= {"번호","이름","혈액형","전화","작성일"};
+		String []title= {"번호","이름","점수","성별","부서명"};
 		tableModel=new DefaultTableModel(title, 0);
 		table=new JTable(tableModel);
 		this.add("Center",new JScrollPane(table));
 
 		//초기 db 데이타 가져오기
-		studentSelectAll();
+		SawonSelectAll();
 	}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		Ex1_SawonSwingCRUD ex=new Ex1_SawonSwingCRUD();
+		Ex2_SawonSwingCRUD ex=new Ex2_SawonSwingCRUD();
 	}
 
 	//db method
 	//db 에서 전체 데이타를 가져와서 테이블에 출력하는 메서드
-	public void studentSelectAll()
+	public void SawonSelectAll()
 	{
 		//기존 테이블의 데이타를 모두 지운다
 		tableModel.setRowCount(0);
@@ -170,30 +186,27 @@ public class Ex1_SawonSwingCRUD extends JFrame{
 		Connection conn=db.getMysqlConnection();
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		String sql="select * from student order by num desc";
+		String sql="select * from Sawon order by num desc";
 
 		try {
 			pstmt=conn.prepareStatement(sql);
 			rs=pstmt.executeQuery();
 
-			SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 			while(rs.next())
 			{
 				Vector<String> data=new Vector<String>();
 				String num=rs.getString("num");
 				String name=rs.getString("name");
-				String blood=rs.getString("blood");
-				String phone=rs.getString("phone");
-
-				Timestamp ts=rs.getTimestamp("writeday");
-				String writeday=sdf.format(ts);
-
+				String score=rs.getString("score");
+				String gender=rs.getString("gender");
+				String buseo=rs.getString("buseo");
+				
 				//Vector 에 순서대로 추가한다
 				data.add(num);
 				data.add(name);
-				data.add(blood);
-				data.add(phone);
-				data.add(writeday);
+				data.add(score);
+				data.add(gender);
+				data.add(buseo);
 
 				//테이블에 추가
 				tableModel.addRow(data);				
@@ -207,7 +220,7 @@ public class Ex1_SawonSwingCRUD extends JFrame{
 	}
 
 	//db 에 추가
-	public void insertStudent(String name,String phone,String blood)
+	public void insertSawon(String name,int score,String gender,String buseo)
 	{
 		//		System.out.println(name);
 		//		System.out.println(phone);
@@ -215,14 +228,15 @@ public class Ex1_SawonSwingCRUD extends JFrame{
 
 		Connection conn=db.getMysqlConnection();
 		PreparedStatement pstmt=null;
-		String sql="insert into student values (null,?,?,?,now())";
+		String sql="insert into Sawon values (null,?,?,?,?)";
 
 		try {
 			pstmt=conn.prepareStatement(sql);
-			//? 3개 바인딩
+			//? 4개 바인딩
 			pstmt.setString(1, name);
-			pstmt.setString(2, blood);
-			pstmt.setString(3, phone);
+			pstmt.setInt(2, score);
+			pstmt.setString(3, gender);
+			pstmt.setString(4, buseo);
 			//실행
 			pstmt.execute();			
 		} catch (SQLException e) {
@@ -235,12 +249,12 @@ public class Ex1_SawonSwingCRUD extends JFrame{
 	}	
 
 	//db 삭제하는 메서드
-	public void deleteStudent(String num)
+	public void deleteSawon(String num)
 	{
 		//System.out.println(num);
 		Connection conn=db.getMysqlConnection();
 		PreparedStatement pstmt=null;
-		String sql="delete from student where num=?";
+		String sql="delete from Sawon where num=?";
 
 		try {
 			pstmt=conn.prepareStatement(sql);
@@ -258,7 +272,7 @@ public class Ex1_SawonSwingCRUD extends JFrame{
 
 	}
 
-	public void searchStudent(String searchName) {
+	public void searchSawon(String searchBuseo) {
 		// TODO Auto-generated method stub
 		//기존 테이블의 데이타를 모두 지운다
 		tableModel.setRowCount(0);
@@ -266,32 +280,29 @@ public class Ex1_SawonSwingCRUD extends JFrame{
 		Connection conn=db.getMysqlConnection();
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		String sql="select * from student where name like ?";
+		String sql="select * from Sawon where buseo=?";
 
 		try {
 			pstmt=conn.prepareStatement(sql);
 			//바인딩
-			pstmt.setString(1, "%"+searchName+"%");
+			pstmt.setString(1, searchBuseo);
 			rs=pstmt.executeQuery();
 
-			SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 			while(rs.next())
 			{
 				Vector<String> data=new Vector<String>();
 				String num=rs.getString("num");
 				String name=rs.getString("name");
-				String blood=rs.getString("blood");
-				String phone=rs.getString("phone");
-
-				Timestamp ts=rs.getTimestamp("writeday");
-				String writeday=sdf.format(ts);
-
+				String score=rs.getString("score");
+				String gender=rs.getString("gender");
+				String buseo=rs.getString("buseo");
+				
 				//Vector 에 순서대로 추가한다
 				data.add(num);
 				data.add(name);
-				data.add(blood);
-				data.add(phone);
-				data.add(writeday);
+				data.add(score);
+				data.add(gender);
+				data.add(buseo);
 
 				//테이블에 추가
 				tableModel.addRow(data);				
