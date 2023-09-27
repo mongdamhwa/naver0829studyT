@@ -7,7 +7,45 @@
 <style>
     body * {
         font-family: 'Jua';
+        box-sizing: border-box; /*크기설정시 테두리선까지 포함*/
     }
+    
+    body{
+		background-color: #222;
+		height: 100%;
+		margin:0;
+	}
+	
+	#container{
+		position: absolute;
+		left:50%;
+		margin-left:-450px;
+		width:900px;
+		height:100%;
+		background: #fff;
+	}
+	
+	aside{
+		float: left;
+		width:250px;
+		padding: 20px 50px;
+		height: 100%;
+		background: rgb(204,204,204);
+	}
+	
+	aside>div>img{
+		width:120px;
+		height: 120px;
+		border: 1px solid gray;
+		border-radius: 100px;
+	}
+	
+	#main{
+		float: right;
+		padding: 20px;
+		margin:10px;
+	}
+    
 </style>
 <script>
 	window.onload=function(){
@@ -68,6 +106,27 @@
 					</ul>
 				</li>
 			</ul>
+		</section>
+		
+		<!--학력 -->
+		<section>
+			<h3 class="subtitle">Education</h3>
+			<table>
+				<caption><b>학력사항</b></caption>
+				<thead>
+					<tr>
+						<th>출신학교</th><th>전공</th><th>기간</th><th>구분</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>**대학교</td><td>영문과</td><td>2015.3.1~2018.2.10</td><td>졸업</td>
+					</tr>
+					<tr>
+						<td>**고등학교</td><td>_</td><td>2012.3.1~2012.2.10</td><td>졸업</td>
+					</tr>
+				</tbody>
+			</table>
 		</section>
 	</div>
 </div>	
