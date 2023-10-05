@@ -37,7 +37,8 @@
 	$(function(){
 		//$(selector).each : selector 갯수만큼 반복
 		$("div.a").each(function(index){
-			$(this).html(`<h5>${index}:Hello</h5>`);
+			//$(this).html(`<h5>${index}:Hello</h5>`);
+			$(this).html(`${index}:Hello`);
 			//hello_index 클래스를 적용시켜보세요
 			//$(this).addClass(`hello_${index}`);
 			$(this).addClass("hello_"+index);
