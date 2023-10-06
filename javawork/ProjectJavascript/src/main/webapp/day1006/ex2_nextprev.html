@@ -12,10 +12,44 @@
     }
 </style>
 <script>
-	
+	$(function(){
+		//next():다음노드
+		//prev():이전노드
+		//find/children(selector):하위태그중 특정 노드찾기
+		
+		$("div.a").next().css("background-color","orange");
+		
+		$("div.b").prev().css("background-color","pink");
+		
+		$("div.a").find("h5").css("color","red");//하위태그중 h5를 찾아서 글자색 변경
+		
+		$("div.a").next().children("img").css("border","2px solid green");
+		
+		$("div.a").next().next().next().css("border","2px solid red");
+		
+		$("img:last").prev().attr("src","../food/12.jpg");
+	});
 </script>	
 </head>
 <body>
-	
+<div class="a">
+	<img src="../image/C3.png" width="100">
+	<h5>귀염둥이</h5>
+	<span>Hello</span>
+</div>	
+<div class="b">
+	<img src="../image/C7.png" width="100">
+	<h5>사랑둥이</h5>
+	<span>Happy</span>
+</div>
+<img src="../shop/20.jpg" width="200">
+<img src="../shop/10.jpg" width="200">
+
 </body>
 </html>
+
+
+
+
+
+
