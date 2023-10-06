@@ -10,6 +10,24 @@
     body * {
         font-family: 'Jua';
     }
+    
+    div.todayhome>figure.photo{
+		float: left;
+		margin-right:10px;
+	}
+	div.todayhome>figure.photo>img{
+		width:100px;
+		height: 100px;
+	}
+	
+	div.todayhome2>figure.photo{
+		float: left;
+		margin-right:10px;
+	}
+	div.todayhome2>figure.photo>img{
+		width:100px;
+		height: 100px;
+	}
 </style>
 <script>
 $(function(){
@@ -71,11 +89,38 @@ $(function(){
 	};
 	
 	//class="todayhome" 에 json 데이타를 읽어서 추가하기(figure)
-
+	$.each(arr.navData,function(index,item){
+			let s=
+			  `
+			  <figure class="photo">
+				  <img src="${item.img}">
+				  <figcaption>
+					  <h5>${item.title}</h5>
+				  </figcaption>
+			  </figure>
+			  `;
+			 $("div.todayhome").append(s);
+		});
+		
+		
+		$.each(arr.categoryData,function(index,item){
+			let s=
+			  `
+			  <figure class="photo">
+				  <img src="${item.img}">
+				  <figcaption>
+					  <h5>${item.title}</h5>
+				  </figcaption>
+			  </figure>
+			  `;
+			 $("div.todayhome2").append(s);
+		});
 });
 </script>	
 </head>
 <body>
 <div class="todayhome"></div>
+<hr style="clear: both;">
+<div class="todayhome2"></div>
 </body>
 </html>
