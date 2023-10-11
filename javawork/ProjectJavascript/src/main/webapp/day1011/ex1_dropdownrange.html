@@ -37,8 +37,23 @@
 			
 			//.shopname 의 텍스트 변경
 			$(".shopname").text(imgtext);
+			
+			//버튼 텍스트도 변경
+			$("#btnsangpum").text(imgtext);
 		});
 			
+		//range 이벤트
+		$(".photosize").mousemove(function(){
+			//값을 얻는다
+			let v=$(this).val();
+			
+			//값 출력
+			$(".shopwidth").text(v);
+			
+			//사진 너비에도 적용
+			$("img.photo").css("width",v+"px");
+			
+		});
 	});
 </script>	
 </head>
