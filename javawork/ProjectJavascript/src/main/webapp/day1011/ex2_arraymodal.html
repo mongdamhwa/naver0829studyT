@@ -21,24 +21,45 @@
 	}
 </style>
 <script>
-	
+	$(function(){
+		$("img.photo").click(function(){
+			//이미지 src 얻기
+			let imgsrc=$(this).attr("src");
+			//모달이미지에 적용
+			$(".detailphoto").attr("src",imgsrc);
+			
+			//상품명 얻기
+			let sname=$(this).parent().prev().prev().text();
+			
+			//상품명 적용
+			$(".modalsang").text(sname);
+			
+			//가격 얻기
+			let sprice=$(this).parent().prev().text();
+			
+			//가격 적용
+			$(".modalprice").text(sprice);
+		});
+	});
 </script>	
 </head>
 <body>
 <!-- The Modal -->
 <div class="modal" id="myModalPhoto">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-sm">
     <div class="modal-content">
 
       <!-- Modal Header -->
       <div class="modal-header">
-        <h4 class="modal-title">Modal Heading</h4>
+        <h4 class="modal-title">상품 상세정보</h4>
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
 
       <!-- Modal body -->
       <div class="modal-body">
-        Modal body..
+        <h5 class="modalsang">상품명나올곳</h5>
+        <h5 class="modalprice" style="color:red;">가격나올곳</h5>
+        <img src="../shop/1.jpg" class="detailphoto" style="width:100%;border:2px inset orange;">
       </div>
 
       <!-- Modal footer -->
