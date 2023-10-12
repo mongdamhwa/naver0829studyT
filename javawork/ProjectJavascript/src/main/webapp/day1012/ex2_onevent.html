@@ -10,6 +10,11 @@
     body * {
         font-family: 'Jua';
     }
+    
+    .active{
+		border:3px solid palevioletred;
+		border-radius: 10px;
+	}
 </style>
 <script>
 	$(function(){
@@ -39,6 +44,22 @@
 			$("#btn3").remove();
 			$("#btn2").after(tag);
 		});
+		
+		//#btn3 를 클릭하면 1~12 의 난수를 발생후 해당 이미지를 추가한다(class="doll")
+		$(document).on("click","#btn3",function(){
+			//1~12 난수 발생
+			let r=parseInt(Math.random()*12)+1;
+			let imageName="../jquery/"+(r<10?"0"+r+".png":r+".png");
+			$("body").append(`<img src="${imageName}" class="doll">`);			
+		});
+		
+		//.doll 에 마우스를 올리면 active 추가,이전 active 는 제거
+		$(document).on("mouseover","img.doll",function(){
+			//그 이전 추가된 active 제거
+			$(this).siblings("img.doll").removeClass("active");
+			$(this).addClass("active");
+		});
+		
 	});
 </script>	
 </head>
