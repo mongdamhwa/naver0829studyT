@@ -21,6 +21,12 @@
     	height:50px;
     	border:1px solid black;
     }
+    
+    img.photo{
+    	width:80px;
+    	height: 100px;
+    	border:1px solid black;
+    }
 </style>
 </head>
 <body>
@@ -47,6 +53,13 @@
 			<tr>
 				<td><%=++n%></td>
 				<td><%=dto.getSangpum() %></td>
+				<td><%=dto.getPrice() %>원</td>
+				<td align=center>
+					<img class="photo" src="../shop/<%=dto.getPhoto()%>.jpg">
+				</td>
+				<td align=center>
+					<div class="box" style="background-color: <%=dto.getColor()%>"></div>
+				</td>
 			</tr>
 		<%}	
 	%>
