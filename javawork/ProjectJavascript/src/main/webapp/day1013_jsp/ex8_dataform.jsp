@@ -22,15 +22,15 @@
 			<th width="100">이름</th>
 			<td>
 				<input type="text" class="form-control" required="required"
-				autofocus="autofocus">
+				autofocus="autofocus" name="irum">
 			</td>
 		</tr>
 		<tr>
 			<th width="100">점수</th>
 			<td class="input-group">
-				<input type="number" name="java" value="0" step="10"  class="form-control">
-				<input type="number" name="jsp" value="0" step="10"  class="form-control">
-				<input type="number" name="spring" value="0" step="10"  class="form-control">
+				<input type="text" name="java" class="form-control">
+				<input type="text" name="jsp"  class="form-control">
+				<input type="text" name="spring" class="form-control">
 			</td>
 		</tr>
 		<tr>
