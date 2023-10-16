@@ -46,7 +46,35 @@ public class MyShopDao {
 		
 		return list;
 	}
+	
+	//insert
+	public void insertShop(MyShopDto dto)
+	{
+		String sql="insert into myshop (sangpum,color,price,photo,writeday) values (?,?,?,?,now())";
+	}
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
