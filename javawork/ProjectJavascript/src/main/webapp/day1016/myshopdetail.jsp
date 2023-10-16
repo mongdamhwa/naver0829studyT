@@ -1,3 +1,6 @@
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="myshop.data.MyShopDto"%>
+<%@page import="myshop.data.MyShopDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -16,8 +19,52 @@
 </head>
 <%
 	String num=request.getParameter("num");
+	//dao 선언
+	MyShopDao dao=new MyShopDao();
+	//dto 얻기
+	MyShopDto dto=dao.getSangpum(num);
+	
+	//날짜출력 양식
+	SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd EEEE HH:mm");
 %>
 <body>
-<h1><%=num %></h1>
+ <div style="margin: 30px 50px">
+ 	<h4><b><%=dto.getSangpum() %></b></h4>
+ 	<br>
+ 	<img src="../shop/<%=dto.getPhoto()%>"
+ 	  style="width: 300px;border:5px inset gray;"
+ 	  align=left hspace=20>
+ 	<br><br><br><br>
+ 	색상 : <b style="background-color: <%=dto.getColor()%>"><%=dto.getColor() %></b>
+ 	<br><br>
+ 	가격 : <%=dto.getPrice() %>원
+ 	<br><br>
+ 	등록일 : <%=sdf.format(dto.getWriteday()) %>
+ </div>
+ <div class="buttons">
+  	<button type="button" class="btn btn-outline-secondary"
+  	onclick="location.href='myshopupdateform.jsp?num=<%=dto.getNum()%>'">수정</button>
+  	
+  	<button type="button" class="btn btn-outline-secondary"
+  	onclick="location.href='myshopdelete.jsp?num=<%=dto.getNum()%>'">삭제</button>
+  	
+  	<button type="button" class="btn btn-outline-secondary"
+  	onclick="location.href='myshop.jsp'">목록</button>  	
+ </div>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
