@@ -51,6 +51,24 @@ public class MyShopDao {
 	public void insertShop(MyShopDto dto)
 	{
 		String sql="insert into myshop (sangpum,color,price,photo,writeday) values (?,?,?,?,now())";
+		Connection conn=db.getConnection();
+		PreparedStatement pstmt=null;
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			//바인딩
+			pstmt.setString(1, dto.getSangpum());
+			pstmt.setString(2, dto.getColor());
+			pstmt.setInt(3, dto.getPrice());
+			pstmt.setString(4, dto.getPhoto());
+			//실행
+			pstmt.execute();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			db.dbClose(pstmt, conn);
+		}
 	}
 	
 }

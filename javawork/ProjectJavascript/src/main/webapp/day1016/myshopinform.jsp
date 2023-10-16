@@ -40,7 +40,7 @@
 				<%
 				for(int i=1;i<=34;i++)
 				{%>
-					<option value="../shop/<%=i%>.<%=(i==24?"gif":"jpg")%>">상품 <%=i%></option>
+					<option value="<%=i%>.<%=(i==24?"gif":"jpg")%>">상품 <%=i%></option>
 				<%}
 				%>
 				</select>
@@ -49,7 +49,7 @@
 					$("#photo").change(function(){
 						let img_val=$(this).val();
 						//.photo 의 src 에 적용
-						$(".photo").attr("src",img_val);
+						$(".photo").attr("src","../shop/"+img_val);
 					});
 				</script>
 			</td>
