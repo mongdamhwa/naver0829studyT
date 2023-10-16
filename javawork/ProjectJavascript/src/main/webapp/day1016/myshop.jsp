@@ -37,6 +37,19 @@
     	margin-right: 5px;
     }
 </style>
+<script type="text/javascript">
+	$(function(){
+		//작은 이미지 클릭시 num 얻어서 myshopdetail.jsp 로 이동
+		$("img.small").click(function(){
+			let num=$(this).attr("num");
+			//페이지 이동
+			//location.href="myshopdetail.jsp?num="+num;
+			//es6 의 리터럴 문자 사용시-jsp자체적으로 $기능이 있으므로
+			//앞에 \를 붙여서 변수를 가져온다
+			location.href=`myshopdetail.jsp?num=\${num}`;
+		});
+	});
+</script>
 </head>
 <body>
 <%
@@ -72,7 +85,8 @@
 			<tr align="center">
 				<td><%=++n%></td>
 				<td align="left">
-					<img class="small" src="../shop/<%=dto.getPhoto()%>">
+					<img class="small" src="../shop/<%=dto.getPhoto()%>"
+					 num="<%=dto.getNum()%>">
 					<%=dto.getSangpum()%>
 				</td>
 				<td>
