@@ -71,6 +71,26 @@ public class MyShopDao {
 		}
 	}
 	
+	//delete
+	public void deleteShop(String num)
+	{
+		String sql="delete from myshop where num=?";
+		Connection conn=db.getConnection();
+		PreparedStatement pstmt=null;
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			//바인딩
+			pstmt.setString(1, num);
+			//실행
+			pstmt.execute();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			db.dbClose(pstmt, conn);
+		}
+	}
 }
 
 

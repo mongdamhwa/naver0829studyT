@@ -21,6 +21,21 @@
     	background-color: #ccf;
     	color:blue;
     }
+    
+    div.box{
+    	width:60px;
+    	height: 60px;
+    	border:1px solid black;
+    	border-radius: 100px;
+    }
+    
+    img.small{
+    	width: 50px;
+    	height: 50px;
+    	cursor: pointer;
+    	border: 1px solid black;
+    	margin-right: 5px;
+    }
 </style>
 </head>
 <body>
@@ -50,9 +65,41 @@
 		</tr>
 	</thead>
 	<tbody>
-	
+	<%
+		int n=0;
+		for(MyShopDto dto:list)
+		{%>
+			<tr align="center">
+				<td><%=++n%></td>
+				<td align="left">
+					<img class="small" src="../shop/<%=dto.getPhoto()%>">
+					<%=dto.getSangpum()%>
+				</td>
+				<td>
+					<div class="box" style="background-color: <%=dto.getColor() %>"></div>
+				</td>
+				<td align="right"><%=dto.getPrice() %>원</td>
+				<td><%=sdf.format(dto.getWriteday()) %></td>
+				<td>
+					<button type="button" class="btn btn-sm btn-danger del"
+					num="<%=dto.getNum()%>">삭제</button>				
+				</td>
+			</tr>
+		<%}
+	%>
 	</tbody>
 </table>
+<script type="text/javascript">
+	$(document).on("click",".del",function(){
+		let num=$(this).attr("num");
+		
+		let a=confirm("삭제하려면 [확인]을 눌러주세요");
+		if(a){
+			location.href="myshopdelete.jsp?num="+num;
+		}
+	});					
+</script>
+
 </body>
 </html>
 
