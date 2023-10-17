@@ -12,10 +12,30 @@
 <link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Jua&family=Lobster&family=Nanum+Pen+Script&family=Permanent+Marker&family=Single+Day&display=swap" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+
 <style>
     body * {
         font-family: 'Jua';
     }
+    
+    a:link{/*초기 a링크에 적용*/
+    	text-decoration: none;
+    	color: black;
+    }
+    a:visited {/*한번이라도 클릭한 글에만 적용*/
+		text-decoration: none;
+		color: gray;
+	}
+	a:hover {/*a태그에 마우스를 올렸을때*/
+		text-decoration: underline;
+		color: blue;
+	}
+	
+	.photoicon{
+		font-size: 0.8em;
+		color: gray;
+	}
 </style>
 </head>
 <%
@@ -52,7 +72,26 @@
 				</td>
 			</tr>
 		<%}else{
-			
+			int n=0;
+			for(SimpleBoardDto dto:list)
+			{%>
+				<tr align="center">
+					<td><%=list.size()-n++ %></td>
+					<td align="left">
+						<a href="content.jsp?num=<%=dto.getNum()%>">
+							<%=dto.getSubject() %>
+							<%
+							if(!dto.getPhoto().equals("no")){%>
+								<i class="bi bi-image photoicon"></i>
+							<%}
+							%>
+						</a>
+					</td>
+					<td><%=dto.getWriter() %></td>
+					<td><%=sdf.format(dto.getWriteday()) %></td>
+					<td><%=dto.getReadcount() %></td>
+				</tr>
+			<%}
 		}
 		%>
 		</tbody>
