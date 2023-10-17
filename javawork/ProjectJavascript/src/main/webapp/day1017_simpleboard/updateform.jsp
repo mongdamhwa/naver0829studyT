@@ -62,7 +62,8 @@
 <body>
 <!-- 이미지 출력할곳 -->
  <img id="showimg" src="../save/<%=dto.getPhoto() %>"
- style="position: absolute;left:600px;top:60px;max-width: 300px;">
+ style="position: absolute;left:600px;top:60px;max-width: 300px;"
+ onerror="this.style.display='none';"><!-- error가 발생하면 안보이게 처리(해당 파일이 없는경우) -->
  
 <div style="margin:30px 50px;">
 	<form action="./updateaction.jsp" method="post" enctype="multipart/form-data">
