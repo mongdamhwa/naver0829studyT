@@ -64,6 +64,19 @@
  		</tr>
  		<tr>
  			<td align="center">
+ 				<div style="margin-bottom: 10px;">
+ 					<form action="./answerinsert.jsp" method="post">
+ 						<input type="hidden" name="num" value="<%=num%>">
+ 						<div class="input-group" style="width:500px;"> 						
+ 							<input type="text" name="nickname" class="form-control"
+ 							style="margin-left:5px;width:100px;" placeholder="닉네임">
+ 							<input type="text" name="content" class="form-control"
+ 							style="margin-left:5px;width:300px;" placeholder="댓글">
+ 							
+ 							<button type="submit" class="btn btn-sm btn-outline-success">저장</button>
+ 						</div>
+ 					</form>
+ 				</div> 			
  				<button type="button" class="btn btn-outline-success"
  				style="width: 100px;" onclick="location.href='boardform.jsp'">글쓰기</button>
  				
