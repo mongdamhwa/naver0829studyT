@@ -43,8 +43,18 @@
 						if(item.addr==null)
 							s+="<td>주소없음</td>";
 						else
-							s+="<td>"+item.addr+"</td>";
-							
+							s+="<td>"+item.addr+"</td>";							
+						
+						//취미
+						if(item.hobby==null)
+							s+="<td>취미 없음</td>";
+						else{
+							s+="<td>";
+							$.each(item.hobby,function(i,ele){
+								s+=`[${ele}]<br>`;
+							});
+							s+="</td>";
+						}
 						s+="</tr>";							
 					});
 					s+="</tbody></table>";
