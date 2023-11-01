@@ -22,7 +22,6 @@
 		ob.put("photo",dto.getPhoto());
 		ob.put("readcount",dto.getReadcount());
 		ob.put("writeday",sdf.format(dto.getWriteday()));
-		
 		arr.add(ob);		
 	}
 %>
