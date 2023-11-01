@@ -53,13 +53,30 @@
     div.content{
 		display: none;	
 	}
+	
+	.mytooltip{
+		position: absolute;
+		color:black;
+		width:auto;
+		background-color: #f90;
+		border:2px solid white;
+		padding: 10px;
+		font-size: 14px;
+		border-radius: 30px;
+		/*opacity:0.8;*/
+		display: none;
+	}
+	
+	.mytooltip img{
+		border-radius: 30px;
+	}
 </style>
 <script type="text/javascript">
 	$(function(){
 		//처음 시작시 그리드모양 이미지형태로 출력하기
-		//grid();
+		grid();
 		
-		list();
+		//list();
 		
 		$(".simplelist").css("color","red");
 		
@@ -73,6 +90,28 @@
 			$(this).css("color","red");
 			$(".simplegrid").css("color","black");
 			list();
+		});
+		
+		//list 의 제목 클릭시 해당 내용만 나오게 하기
+		$(document).on("click","b.subject",function(){
+			$("div.content").hide();
+			
+			$(this).parent().next().slideDown('slow');
+		});
+		//사진에 마우스를 올리면 사진이 크게 보이게 하기				
+		$(document).on("mousemove","div.box img",function(e){
+			$("div.mytooltip").css({
+					"left":e.pageX+"px",
+					"top":e.pageY+"px"
+			});
+		});
+		$(document).on("mouseover","div.box img",function(e){
+			let imgSrc=$(this).attr("src");
+			$("div.mytooltip").html(`<img src="${imgSrc}" style="max-width:400px">`);
+			$("div.mytooltip").fadeIn('fast');
+		});
+		$(document).on("mouseout","div.box img",function(e){
+			$("div.mytooltip").fadeOut('fast');
 		});
 	});
 	
@@ -175,6 +214,13 @@
 	<div class="list">
 		123
 	</div>
+	<div class="mytooltip">
+	 Java<br>
+	 HTML5<br>
+	 SpringBoot<br>
+	 React<br>
+	 jQuery
+ </div>
 </body>
 </html>
 
