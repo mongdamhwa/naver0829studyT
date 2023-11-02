@@ -18,7 +18,7 @@ public class StudentDao {
 		Connection conn=db.getConnection();
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		String sql="select * from student where name like ? order by num";
+		String sql="select * from student where name like ? order by num desc";
 
 		try {
 			pstmt=conn.prepareStatement(sql);
