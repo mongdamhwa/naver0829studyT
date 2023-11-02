@@ -1,20 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Jua&family=Lobster&family=Nanum+Pen+Script&family=Permanent+Marker&family=Single+Day&display=swap" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-<style>
-    body * {
-        font-family: 'Jua';
-    }
-</style>
-</head>
-<body>
-
-</body>
-</html>
+<%
+	//전체 쿠키중 loginok 쿠키를 찾아서 삭제후 메인으로 이동한다
+	Cookie []cookies=request.getCookies();
+	if(cookies!=null)
+	{
+		for(Cookie ck:cookies)
+		{
+			if(ck.getName().equals("loginok")){
+				//ck 의 유지시간과 path 다시 지정
+				ck.setMaxAge(0);
+				ck.setPath("/");
+				//브라우저에 다시 저장
+				response.addCookie(ck);
+				break;
+			}
+		}
+	}
+	response.sendRedirect("loginmain.jsp");
+%>
