@@ -14,17 +14,33 @@
     }
 </style>
 </head>
+<%
+	//세션으로부터 아이디와 체크저장값을 얻는다
+	String loginid=(String)session.getAttribute("loginid");
+	String savestatus=(String)session.getAttribute("savestatus");
+	boolean bCheck;
+	if(savestatus==null || savestatus.equals("no")){
+		bCheck=false;//체크를 안했을경우
+	}else{
+		bCheck=true;//체크를 했을경우
+	}
+	
+	//체크를 안했을경우는 아이디를 없앤다
+	
+	if(!bCheck) loginid="";
+%>
 <body>
 <div style="margin:30px 100px;">
  <form action="loginaction.jsp" method="post">
 	<table class="table table-bordered" style="width:300px;border:5px groove gray;">
 		<caption align="top">
-			<label><input type="checkbox" name="saveid">아이디저장</label>
+			<label><input type="checkbox" name="saveid"
+			 <%=bCheck?"checked":""%>>아이디저장</label>
 		</caption>
 		<tr>
 			<td width=150>
 				<input type="text" class="form-control" autofocus required
-				placeholder="아이디" name="loginid">
+				placeholder="아이디" name="loginid" value="<%=loginid%>">
 			</td>
 			<td rowspan="2" width=100>
 				<button type="submit" style="width:100%;height:100px">로그인</button>
