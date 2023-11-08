@@ -34,30 +34,46 @@
 		<td>${num1-num2}</td>
 	</tr>
 	<tr>
-		<td></td>
-		<td></td>
+		<td>\${num1*num2}</td>
+		<td>${num1*num2}</td>
 	</tr>
 	<tr>
-		<td></td>
-		<td></td>
+		<td>\${num1/num2}</td>
+		<td>${num1/num2}</td>
 	</tr>
 	<tr>
-		<td></td>
-		<td></td>
+		<td>\${num1 div num2}</td>
+		<td>${num1 div num2}</td>
 	</tr>
 	<tr>
-		<td></td>
-		<td></td>
+		<td>\${num1 %num2}</td>
+		<td>${num1 %num2}</td>
 	</tr>
 	<tr>
-		<td></td>
-		<td></td>
+		<td>\${num1 mod num2}</td>
+		<td>${num1 mod num2}</td>
 	</tr>
 	<tr>
-		<td></td>
-		<td></td>
+		<td>
+			num1 1 증가
+		</td>
+		<td>
+			<c:set var="num1" value="${num1+1}"/>
+			${num1}
+		</td>
 	</tr>
 </table>
+<hr>
+<c:set var="money" value="5678900"/>
+<c:set var="ave" value="78.93678"/>
+<c:set var="num3" value="0.5645678"/>
+${money}<br>
+${ave}<br>
+<fmt:formatNumber value="${money}" type="number"/><br>
+<fmt:formatNumber value="${money}" type="currency" currencySymbol="$"/><br>
+<fmt:formatNumber value="${money}" type="currency" currencySymbol="￦"/><br>
+<fmt:formatNumber value="${num3}" type="percent"/><br>
+<fmt:formatNumber value="${num3}" type="percent" maxFractionDigits="2"/><br>
 </body>
 </html>
 
