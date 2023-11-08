@@ -18,7 +18,7 @@
     
     .photo{
     	width:200px;
-    	height: 250px;
+    	height: 300px;
     	padding: 10px;
     	border: 2px solid gray;
     	border-radius: 30px;
@@ -43,6 +43,15 @@
 	<div class="photo">
 		<figure>
 			<img src="../../shop/${dto.photo}">
+			<figcaption>
+			<span>
+				상품번호: ${dto.num}<br>
+				상품명 : ${dto.sangpum}<br>
+				가 격 : <fmt:formatNumber value="${dto.price}" type="currency" 
+					currencySymbol="￦" maxFractionDigits="0"/><br>
+				색상 : <b style="background-color: ${dto.color}">${dto.color}</b>
+			</span>
+			</figcaption>
 		</figure>
 	</div>
 </c:forEach>
