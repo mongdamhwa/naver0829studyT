@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>   
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>     
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,6 +17,80 @@
 </style>
 </head>
 <body>
-
+<c:set var="num1" value="7"/>
+<c:set var="num2" value="4"/>
+<h4>num1:${num1},num2:${num2}</h4>
+<table class="table table-bordered" style="width:300px;">
+	<tr>
+		<th>연산식</th>
+		<th>결과</th>
+	</tr>
+	<tr>
+		<td>\${num1+num2}</td>
+		<td>${num1+num2}</td>
+	</tr>
+	<tr>
+		<td>\${num1-num2}</td>
+		<td>${num1-num2}</td>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+	</tr>
+</table>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
