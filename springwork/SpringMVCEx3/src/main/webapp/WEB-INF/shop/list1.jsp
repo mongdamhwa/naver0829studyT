@@ -39,8 +39,36 @@
 	<h3 class="alert alert-info">${shopinfo}</h3>
 	<h5>총 ${count }개의 상품이 있습니다</h5>
 	<hr>
+	<c:forEach var="dto" items="${list}">
+		<div  class="photo">
+			<figure>
+				<img src="../res/shop/${dto.photo}">
+				<figcaption>
+					<h5>${dto.sang}</h5>
+					<h6><fmt:formatNumber value="${dto.price}" type="number"/>원</h6>
+				</figcaption>
+			</figure>
+		</div>
+	</c:forEach>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

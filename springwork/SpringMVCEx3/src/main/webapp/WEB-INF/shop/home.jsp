@@ -21,14 +21,14 @@
    
    ul.menu li{
    	float: left;
-   	width: 150px;
-   	height: 80px;
-   	line-height: 80px;
+   	width: 120px;
+   	height: 60px;
+   	line-height: 60px;
    	border:1px solid gray;
    	margin-right: 10px;
    	cursor: pointer;
    	text-align: center;
-   	font-size: 30px;
+   	font-size: 26px;
    }
    
    ul.menu li a{
@@ -50,6 +50,12 @@
 		</li>
 		<li>
 			<a href="./shop/list3">악세서리</a>
+		</li>
+		<li>
+			<a href="./food/morning/brunch">브런치</a>
+		</li>
+		<li>
+			<a href="./food/photo/detail">식사사진</a>
 		</li>
 	</ul>
 </div>
