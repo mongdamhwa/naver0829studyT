@@ -7,8 +7,7 @@ import org.springframework.stereotype.Component;
 
 //@Component  //id:annoCar
 @Component("mycar") // id 가 mycar 가 된다
-public class AnnoCar {
-	
+public class AnnoCar {	
 	//@Autowired  //자동 주입-에러 발생:매칭 가능한 클래스가 2개이므로 오류가 발생
 	//AnnoTire annoTire;
 	
