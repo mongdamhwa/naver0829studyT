@@ -19,37 +19,11 @@
 </head>
 <body>
 	<h2 class="alert alert-info">TestController 로부터 포워드됨</h2>
-
-	<h4>오늘의 메세지 : ${message}</h4>
-	<h5>현재시간 : ${today}</h5>
-	<h5>현재날짜와 시간 : <fmt:formatDate value="${today}" pattern="yyyy-MM-dd HH:mm"/></h5>
-	
 	<hr>
-	<h4>매핑주소 테스트하기</h4>
-	<ol>
-		<li>
-			<a href="./shop/list">/shop/list</a>
-		</li>
-		<li>
-			<a href="./shop/insert">/shop/insert</a>
-		</li>
-		<li>
-			<a href="./shop/delete">/shop/delete</a>
-		</li>
-		<li>
-			<a href="./shop/list.do">/shop/list.do</a>
-		</li>
-		<li>
-			<a href="./shop/list.nhn">/shop/list.nhn</a>
-		</li>
-		<li>
-			<a href="./board/update">/board/update</a>
-		</li>
-		<li>
-			<a href="./stu/form/test1">/stu/form/test1</a>
-		</li>
-		
-	</ol>
+	<h3>${message}</h3>
+	<h5>오늘의 브런치</h5>
+	<img src="${root}/res/image/K-036.png" width="300">
+	<img src="${root}/photo/K-052.png" width="300">
 </body>
 </html>
 
