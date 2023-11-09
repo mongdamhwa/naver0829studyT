@@ -1,19 +1,17 @@
-package day1109.test5;
+package day1109.test6.anno;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-public class TestMainEx5 {
+public class TestMainAnnoEx6 {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		ApplicationContext ctx=new ClassPathXmlApplicationContext("appcontext2.xml");
 		
-		Car car1=(Car)ctx.getBean("car1");
+		//AnnoCar car1=(AnnoCar)ctx.getBean("annoCar");
+		AnnoCar car1=(AnnoCar)ctx.getBean("mycar");
 		car1.myCarInfo();
-		
-		Car car2=(Car)ctx.getBean("car2");
-		car2.myCarInfo();
 
 	}
 
