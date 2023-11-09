@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import lombok.AllArgsConstructor;
 
 @Component("mycar2") 
-@AllArgsConstructor
+@AllArgsConstructor   //생성자 주입방식으로 자동주입한다
 public class AnnoCar2 {	
 	AnnoKoreaTire koreaTire;	
 	AnnoCanadaTire canadaTire;
