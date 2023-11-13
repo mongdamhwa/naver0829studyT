@@ -18,7 +18,26 @@
 </style>
 </head>
 <body>
-
-
+<h3>사진이 업로드된 실제 경로:${path}</h3>
+<h3>제목:${title }</h3>
+<h3>업로드된 파일명 : ${photo}</h3>
+<img src="./res/upload/${photo}" style="max-width: 300px">
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

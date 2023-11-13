@@ -18,7 +18,34 @@
 </style>
 </head>
 <body>
-
-
+	<h2>여러개의 사진 업로드 결과</h2>
+	<h3>제목 : ${title }</h3>
+	<hr>
+	<c:forEach var="f" items="${files}">
+		<figure style="float: left;">
+			<img src="./res/upload/${f}" width="200" height="200" border="2" hspace="10">
+			<figcaption>
+				${f}
+			</figcaption>
+		</figure>
+	</c:forEach>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
