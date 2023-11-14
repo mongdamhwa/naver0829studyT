@@ -2,5 +2,7 @@
 <aop-reference-model>
 <aop-project name="SpringMVCEx2"/>
 <aop-project name="SpringMVCEx3"/>
+<aop-project name="SpringReadMVCEx4"/>
 <aop-project name="SpringEx1"/>
+<aop-project name="SpringUploadMVCEx5"/>
 </aop-reference-model>
