@@ -17,4 +17,9 @@ public class BoardDao {
 	{
 		return session.selectOne(nameSpace+"totalCountOfBoard");
 	}
+	
+	public void insertBoard(BoardDto dto)
+	{
+		session.insert(nameSpace+"insertBoard", dto);
+	}
 }

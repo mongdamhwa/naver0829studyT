@@ -4,4 +4,7 @@
 	<select id="totalCountOfBoard" resultType="int">
 		select count(*) from simpleboard
 	</select>
+	<insert id="insertBoard" parameterType="BoardDto">
+		insert into simpleboard values (null,#{writer},#{subject},#{content},#{photo},0,now())
+	</insert>
 </mapper>

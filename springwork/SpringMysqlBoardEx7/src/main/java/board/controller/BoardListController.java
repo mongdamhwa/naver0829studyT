@@ -14,7 +14,7 @@ public class BoardListController {
 	@Autowired
 	private BoardDao boardDao;
 	
-	@GetMapping("/board/list")
+	@GetMapping("/simple/list")
 	public String list(Model model)
 	{
 		//전체 갯수 가져오기

@@ -5,4 +5,6 @@
 <aop-project name="SpringReadMVCEx4"/>
 <aop-project name="SpringEx1"/>
 <aop-project name="SpringUploadMVCEx5"/>
+<aop-project name="SpringUploadMVCEx6"/>
+<aop-project name="SpringMysqlBoardEx7"/>
 </aop-reference-model>
