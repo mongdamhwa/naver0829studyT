@@ -44,6 +44,11 @@ public class BoardDao {
 	{
 		session.delete(nameSpace+"deleteBoard", num);
 	}
+	
+	public void updateBoard(BoardDto dto)
+	{
+		session.update(nameSpace+"updateBoard", dto);
+	}
 }
 
 
