@@ -29,7 +29,7 @@
    		left:400px;
    }
    
-   .photo{
+   .photo,.photo2{
    		width:120px;
 		height: 120px;
 		border: 1px solid gray;
@@ -41,13 +41,111 @@
    		font-size: 30px;
    		cursor: pointer;
    }
+   
+   div.box{
+   		width:500px;
+   		height: 150px;
+   		padding:10px;
+   		border:2px solid gray;
+   		box-shadow:3px 3px 3px gray;
+   		margin-bottom:10px;
+   		border-radius: 20px;
+   }
 </style>
 <script type="text/javascript">
 	$(function(){
+		list();//처음 로딩시 기존 메모들 출력
+		
 		$(".cameraupload").click(function(){
 			$("#upload").trigger("click");
 		});
-	});
+		
+		//파일선택시 이벤트
+		$("#upload").change(function(){
+			let form=new FormData();
+			form.append("upload",$("#upload")[0].files[0]);//선택한 1개의 파일만 추가
+			
+			/*
+			processData:false : 서버에 전달하는 데이타는 query string이라는 형태로 전달된다
+			파일전송의 경우 이를 하지 않아야하는데 그설정이 false ,
+			contentType:false : enctype 이 원래 기본값이 application/x-www..... 이거인데
+			  multipart/form-data로 변경해준다
+			*/
+			$.ajax({
+				type:"post",
+				dataType:"text",
+				url:"./upload",
+				processData:false,
+				contentType:false,
+				data:form,
+				success:function(res){
+					//alert(res);//랜덤 파일명 확인후 이미지 출력
+					$(".photo").attr("src",`../res/upload/\${res}`);
+			    }
+			});
+		});
+		
+		$("#btnmemoadd").click(function(){
+			let nick=$("#nickname").val();
+			let memo=$("#memo").val();
+			if(nick.length==0){
+				alert("닉네임을 꼭 입력해주세요");
+				return;
+			}
+			
+			if(memo.length==0){
+				alert("메모를 꼭 입력해주세요");
+				return;
+			}
+			
+			$.ajax({
+				type:"get",
+				dataType:"text",
+				url:"./add",
+				data:{"nickname":nick,"memo":memo},
+				success:function(res){
+					//다시 메모 전체 출력
+					list();
+					//입력값들 지우기
+					$("#nickname").val("");
+					$("#memo").val("");
+					$(".photo").attr("src","../res/upload/noimage.png");
+					
+			    }
+			});
+		});
+	});//function close
+	
+	function list()
+	{
+		//전체 메모 출력해주는 함수
+		$.ajax({
+			type:"get",
+			dataType:"json",
+			url:"./view",
+			success:function(res){
+				let s="";
+				$.each(res,function(idx,item){
+					s+=
+						`
+						<div class="box">
+							<img src="../res/upload/\${item.photo}" class="photo2" align="left"
+							hspace="20">
+							
+							닉네임 : \${item.nickname}<br>
+							메  모 : \${item.memo}<br>
+							작성일 : \${item.writeday}<br>
+							추천수 : \${item.likes}&nbsp; <i class="bi bi-suit-heart" style="cursor:pointer;color:red;"></i><br>
+							<a href="#" class="memodel" num="\${item.num}" style="cursor:pointer;color:red;">삭제</a>
+					    </div>
+						
+						`;
+				});
+				
+				$(".memolist").html(s);
+		    }
+		});
+	}
 </script>
 </head>
 <body>
@@ -57,6 +155,13 @@
 	<input type="file" name="upload" id="upload" style="display: none;">
 	<br>
 	<img src="../res/upload/noimage.png" class="photo">
+	<br><br>
+	<input type="text" id="nickname" class="form-control" style="width: 200px;"
+	placeholder="닉네임 입력">
+	<input type="text" id="memo" class="form-control" style="width: 300px;"
+	placeholder="메모 메세지">
+	<button type="button" class="btn btn-sm btn-outline-danger"
+	id="btnmemoadd">Memo Add</button>
 </div>
 
 <div class="memolist">
