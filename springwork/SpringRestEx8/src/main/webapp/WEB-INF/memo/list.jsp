@@ -36,12 +36,27 @@
 		border-radius:30px;
 		box-shadow: 5px 5px 5px gray;
    }
+   
+   .cameraupload{
+   		font-size: 30px;
+   		cursor: pointer;
+   }
 </style>
+<script type="text/javascript">
+	$(function(){
+		$(".cameraupload").click(function(){
+			$("#upload").trigger("click");
+		});
+	});
+</script>
 </head>
 <body>
 <h3 class="alert alert-success">간단한 메모를 남겨봅시다</h3>
 <div class="memoform">
-	<i class="bi bi-camera-fill"></i>
+	<i class="bi bi-camera-fill cameraupload"></i>
+	<input type="file" name="upload" id="upload" style="display: none;">
+	<br>
+	<img src="../res/upload/noimage.png" class="photo">
 </div>
 
 <div class="memolist">
