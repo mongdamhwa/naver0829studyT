@@ -18,31 +18,14 @@
 </style>
 </head>
 <body>
-<h3 class="alert alert-danger">Spring REST 예제들</h3>
-
-<ul>
-	<li>
-		<a href="./memo/list">간단한 메모-사진1장 업로드 포함</a>
-	</li>
-	<li>
-		<a href="./storage/form">네이버 스토리지에 사진 올려보기 연습</a>
-	</li>
-</ul>
+<h5>80X80 사진</h5>
+<img src="${photo80}" border="1">
 <hr>
-
-
+<h5>150X150 사진</h5>
+<img src="${photo150}" border="1">
+<hr>
+<h5>원본 사진</h5>
+<img src="${photo}" border="1">
+<hr>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
