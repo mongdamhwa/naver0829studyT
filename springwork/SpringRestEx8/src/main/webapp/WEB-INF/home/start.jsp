@@ -25,6 +25,16 @@
 		<a href="./memo/list">간단한 메모-사진1장 업로드 포함</a>
 	</li>
 </ul>
+<hr>
+<h5>80x80</h5>
+<img src="https://fr2k01411649.edge.naverncp.com/82uyvvqSQa/photo/13.jpg?type=f&w=80&h=80&faceopt=true&ttype=jpg">
+
+<h5>150x150</h5>
+<img src="https://fr2k01411649.edge.naverncp.com/82uyvvqSQa/photo/13.jpg?type=f&w=150&h=150&faceopt=true&ttype=jpg">
+
+<h5>원본사진</h5>
+<img src="https://kr.object.ncloudstorage.com/bitcamp-lmh/photo/13.jpg">
+
 </body>
 </html>
 
